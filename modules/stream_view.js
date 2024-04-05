@@ -13,6 +13,11 @@ export class StreamView {
 	#cameraMode = StreamViewOptions.CameraMode.AUTOMATIC;
 
 	/**
+	 * @type {string}
+	 */
+	#chatMode = StreamViewOptions.ChatVisibility.ALWAYS;
+
+	/**
 	 * @type {string|null}
 	 */
 	#sceneId = null;
@@ -139,6 +144,13 @@ export class StreamView {
 	 */
 	async setCameraMode(mode) {
 		this.#cameraMode = mode;
+	}
+
+	/**
+	 * @param {string} mode
+	 */
+	async setChatMode(mode) {
+		this.#chatMode = mode;
 	}
 
 	/**

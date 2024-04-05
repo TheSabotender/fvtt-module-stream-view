@@ -85,6 +85,26 @@ export class StreamViewStream extends StreamView {
 	}
 
 	/**
+	 * @override
+	 */
+	async setChatMode(mode) {
+		super.setChatMode(mode);
+
+		if (mode == StreamViewOptions.ChatVisibility.ALWAYS) {
+			this.#createPopout(StreamViewOptions.PopoutIdentifiers.CHAT, ui.sidebar.tabs.chat);
+		} else if (mode === StreamViewOptions.ChatVisibility.NEVER) {
+			this.#closePopout(StreamViewOptions.PopoutIdentifiers.CHAT);
+		} else if(mode === StreamViewOptions.ChatVisibility.ENCOUNTER) {
+			if(StreamView.isCombatActive())
+			{
+				this.#createPopout(StreamViewOptions.PopoutIdentifiers.CHAT, ui.sidebar.tabs.chat);
+			} else {
+				this.#closePopout(StreamViewOptions.PopoutIdentifiers.CHAT);
+			}
+		}
+	}
+
+	/**
 	 * @private
 	 */
 	#ready() {
@@ -171,6 +191,7 @@ export class StreamViewStream extends StreamView {
 		this._socket.register('closePopouts', () => { return this.#closePopouts() });
 		this._socket.register('toggleNotes', (toggled) => { return this.#toggleNotes(toggled) });
 		this._socket.register('getNotesStatus', () => { return this.#getNotesStatus() });
+		this._socket.register('setChatMode', (mode) => { this.setChatMode(mode)});
 
 		// GM
 		this._socket.register('streamConnected', (userId) => {});
@@ -181,8 +202,12 @@ export class StreamViewStream extends StreamView {
 			this._socket.executeForAllGMs('streamConnected', game?.user?.id);
 		} catch { }
 
-		if (game.settings.get('stream-view', 'show-chat') && !game.settings.get('stream-view', 'show-full-sidebar')) {
-			this.#createPopout(StreamViewOptions.PopoutIdentifiers.CHAT, ui.sidebar.tabs.chat);
+		if (!game.settings.get('stream-view', 'show-full-sidebar')) {
+			let encounter = StreamView.isCombatActive() && game.settings.get('stream-view', 'show-chat') === StreamViewOptions.ChatVisibility.ENCOUNTER;
+			if(encounter || game.settings.get('stream-view', 'show-chat') === StreamViewOptions.ChatVisibility.ALWAYS)
+			{
+				this.#createPopout(StreamViewOptions.PopoutIdentifiers.CHAT, ui.sidebar.tabs.chat);
+			}
 		}
 
 		game.canvas.tokens.releaseAll();
@@ -607,11 +632,18 @@ export class StreamViewStream extends StreamView {
 
 		if (game.settings.get('stream-view', 'auto-show-combat')) {
 			if (!active) {
-				this.#closePopout(StreamViewOptions.PopoutIdentifiers.COMBAT);
-				this.#focusUpdate();
-				return;
-			}
-			this.#createPopout(StreamViewOptions.PopoutIdentifiers.COMBAT, ui.sidebar.tabs.combat);
+				this.#closePopout(StreamViewOptions.PopoutIdentifiers.COMBAT);				
+			} else {
+				this.#createPopout(StreamViewOptions.PopoutIdentifiers.COMBAT, ui.sidebar.tabs.combat);
+			}			
+		}
+
+		if (game.settings.get('stream-view', 'show-chat') === StreamViewOptions.ChatVisibility.ENCOUNTER) {
+			if (!active) {
+				this.#closePopout(StreamViewOptions.PopoutIdentifiers.CHAT);				
+			} else {
+				this.#createPopout(StreamViewOptions.PopoutIdentifiers.CHAT, ui.sidebar.tabs.chat);
+			}			
 		}
 
 		this.#focusCombat(combat);

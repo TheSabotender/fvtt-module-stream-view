@@ -176,6 +176,7 @@ export class StreamViewGM extends StreamView {
 		this._socket.register('closePopouts', () => {});
 		this._socket.register('toggleNotes', (toggled) => {});
 		this._socket.register('getNotesStatus', () => {});
+		this._socket.register('setChatMode', (mode) => {});		
 
 		// GM
 		this._socket.register('streamConnected', (userId) => this.#streamConnected(userId));

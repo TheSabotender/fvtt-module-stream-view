@@ -27,6 +27,16 @@ export class StreamViewOptions {
 	 * @enum {string}
 	 * @readonly
 	 */
+	static ChatVisibility = Object.freeze({
+		NEVER: 'never',
+		ALWAYS: 'always',
+		ENCOUNTER: 'encounter',
+	});
+
+	/**
+	 * @enum {string}
+	 * @readonly
+	 */
 	static PopoutIdentifiers = Object.freeze({
 		COMBAT: 'combat',
 		CHAT: 'chat',
@@ -38,6 +48,10 @@ export class StreamViewOptions {
 
 	static localizePreviewDisplay(condition) {
 		return game.i18n.localize(`stream-view.settings.preview-display.option.${condition}`);
+	}
+
+	static localizeChatVisibility(condition) {
+		return game.i18n.localize(`stream-view.settings.show-chat.option.${condition}`);
 	}
 
 	static init() {
@@ -230,9 +244,14 @@ export class StreamViewOptions {
 			scope: 'world',
 			config: true,
 			restricted: true,
-			requiresReload: true,
-			default: true,
-			type: Boolean,
+			requiresReload: false,
+			choices: {
+				[StreamViewOptions.ChatVisibility.NEVER]: StreamViewOptions.localizeChatVisibility(StreamViewOptions.ChatVisibility.NEVER),
+				[StreamViewOptions.ChatVisibility.ALWAYS]: StreamViewOptions.localizeChatVisibility(StreamViewOptions.ChatVisibility.ALWAYS),
+				[StreamViewOptions.ChatVisibility.ENCOUNTER]: StreamViewOptions.localizeChatVisibility(StreamViewOptions.ChatVisibility.ENCOUNTER),
+			},
+			default: StreamViewOptions.PreviewDisplay.LAYER,
+			type: String,
 		});
 
 		game.settings.register('stream-view', 'chat-position-x', {
