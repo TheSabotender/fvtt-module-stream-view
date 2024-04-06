@@ -654,6 +654,7 @@ export class StreamViewOptions {
 		game.settings.settings.get('stream-view.camera-mode').onChange = (mode) => instance.setCameraMode(mode);
 		game.settings.settings.get('stream-view.disable-manually-tracked-tokens').onChange = (enabled) => { if (enabled) instance.clearTrackedTokens() };
 		game.settings.settings.get('stream-view.preview-display').onChange = (enabled) => { if (enabled) instance.clearTrackedTokens() };
+		game.settings.settings.get('stream-view.show-chat').onChange = (mode) => instance.setChatMode(mode);
 	}
 
 	/**

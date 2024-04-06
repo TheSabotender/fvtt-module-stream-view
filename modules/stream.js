@@ -630,20 +630,26 @@ export class StreamViewStream extends StreamView {
 			}
 		}
 
+		if (!active) {
+			if (game.settings.get('stream-view', 'auto-show-combat')) {
+				this.#closePopout(StreamViewOptions.PopoutIdentifiers.COMBAT);	
+			}
+	
+			if (game.settings.get('stream-view', 'show-chat') === StreamViewOptions.ChatVisibility.ENCOUNTER) {
+				this.#closePopout(StreamViewOptions.PopoutIdentifiers.CHAT);				
+			}
+
+			this.#focusUpdate();
+			return;	
+		}
+		
+
 		if (game.settings.get('stream-view', 'auto-show-combat')) {
-			if (!active) {
-				this.#closePopout(StreamViewOptions.PopoutIdentifiers.COMBAT);				
-			} else {
-				this.#createPopout(StreamViewOptions.PopoutIdentifiers.COMBAT, ui.sidebar.tabs.combat);
-			}			
+			this.#createPopout(StreamViewOptions.PopoutIdentifiers.COMBAT, ui.sidebar.tabs.combat);
 		}
 
 		if (game.settings.get('stream-view', 'show-chat') === StreamViewOptions.ChatVisibility.ENCOUNTER) {
-			if (!active) {
-				this.#closePopout(StreamViewOptions.PopoutIdentifiers.CHAT);				
-			} else {
-				this.#createPopout(StreamViewOptions.PopoutIdentifiers.CHAT, ui.sidebar.tabs.chat);
-			}			
+			this.#createPopout(StreamViewOptions.PopoutIdentifiers.CHAT, ui.sidebar.tabs.chat);
 		}
 
 		this.#focusCombat(combat);

@@ -69,6 +69,7 @@ export class StreamView {
 	constructor(socket) {
 		this.#socket = socket;
 		this.#cameraMode = game.settings.get('stream-view', 'camera-mode');
+		this.#chatMode = game.settings.get('stream-view', 'show-chat');
 	}
 
 	/**
@@ -76,6 +77,13 @@ export class StreamView {
 	 */
 	get cameraMode() {
 		return this.#cameraMode;
+	}
+
+	/**
+	 * @returns {string}
+	 */
+	get chatMode() {
+		return this.#chatMode;
 	}
 
 	/**
