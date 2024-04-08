@@ -250,7 +250,7 @@ export class StreamViewOptions {
 				[StreamViewOptions.ChatVisibility.ALWAYS]: StreamViewOptions.localizeChatVisibility(StreamViewOptions.ChatVisibility.ALWAYS),
 				[StreamViewOptions.ChatVisibility.ENCOUNTER]: StreamViewOptions.localizeChatVisibility(StreamViewOptions.ChatVisibility.ENCOUNTER),
 			},
-			default: StreamViewOptions.PreviewDisplay.LAYER,
+			default: StreamViewOptions.ChatVisibility.ALWAYS,
 			type: String,
 		});
 
