@@ -90,17 +90,21 @@ export class StreamViewStream extends StreamView {
 	async setChatMode(mode) {
 		super.setChatMode(mode);
 
-		if (mode == StreamViewOptions.ChatVisibility.ALWAYS) {
-			this.#createPopout(StreamViewOptions.PopoutIdentifiers.CHAT, ui.sidebar.tabs.chat);
-		} else if (mode === StreamViewOptions.ChatVisibility.NEVER) {
-			this.#closePopout(StreamViewOptions.PopoutIdentifiers.CHAT);
-		} else if(mode === StreamViewOptions.ChatVisibility.ENCOUNTER) {
-			if(StreamView.isCombatActive())
-			{
+		switch (mode) {
+			case StreamViewOptions.ChatVisibility.ALWAYS:
 				this.#createPopout(StreamViewOptions.PopoutIdentifiers.CHAT, ui.sidebar.tabs.chat);
-			} else {
+				break;
+			case StreamViewOptions.ChatVisibility.NEVER:
 				this.#closePopout(StreamViewOptions.PopoutIdentifiers.CHAT);
-			}
+				break;
+			case StreamViewOptions.ChatVisibility.ENCOUNTER:
+				if(StreamView.isCombatActive())
+				{
+					this.#createPopout(StreamViewOptions.PopoutIdentifiers.CHAT, ui.sidebar.tabs.chat);
+				} else {
+					this.#closePopout(StreamViewOptions.PopoutIdentifiers.CHAT);
+				}
+				break;
 		}
 	}
 
