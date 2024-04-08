@@ -489,14 +489,16 @@ export class StreamViewGM extends StreamView {
 			return;
 		}
 
-		if (this.chatMode === StreamViewOptions.ChatVisibility.ALWAYS) {
-			await this.setChatMode(StreamViewOptions.ChatVisibility.ENCOUNTER);
-
-		} else if (this.chatMode === StreamViewOptions.ChatVisibility.ENCOUNTER) {
-			await this.setChatMode(StreamViewOptions.ChatVisibility.NEVER);
-			
-		} else if (this.chatMode === StreamViewOptions.ChatVisibility.NEVER) {
-			await this.setChatMode(StreamViewOptions.ChatVisibility.ALWAYS);
+		switch(thius.chatMode) {
+			case StreamViewOptions.ChatVisibility.ALWAYS:
+				await this.setChatMode(StreamViewOptions.ChatVisibility.ENCOUNTER);
+				break;
+			case StreamViewOptions.ChatVisibility.ENCOUNTER:
+				await this.setChatMode(StreamViewOptions.ChatVisibility.NEVER);
+				break;
+			case StreamViewOptions.ChatVisibility.NEVER:
+				await this.setChatMode(StreamViewOptions.ChatVisibility.ALWAYS);
+				break;
 		}
 	}
 
