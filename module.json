@@ -1,7 +1,7 @@
 {
-  "id": "stream-view",
-  "name": "stream-view",
-  "title": "Stream View",
+  "id": "stream-view-sabo",
+  "name": "stream-view-sabo",
+  "title": "Stream View - Sabotender Edition",
   "description": "This module provides a minimal UI view with automated camera work, ideal for streaming or recording games.",
   "authors": [
     {
@@ -67,9 +67,9 @@
   "socket": true,
   "license": "LICENSE",
   "readme": "README.md",
-  "url": "https://github.com/sPOiDar/fvtt-module-stream-view",
-  "bugs": "https://github.com/sPOiDar/fvtt-module-stream-view/issues",
-  "changelog": "https://github.com/sPOiDar/fvtt-module-stream-view/blob/master/CHANGELOG.md",
-  "manifest": "https://github.com/sPOiDar/fvtt-module-stream-view/raw/master/module.json",
-  "download": "https://github.com/sPOiDar/fvtt-module-stream-view/releases/download/v2.0.3/stream-view-v2.0.3.zip"
+  "url": "https://github.com/thesabotender/fvtt-module-stream-view",
+  "bugs": "https://github.com/thesabotender/fvtt-module-stream-view/issues",
+  "changelog": "https://github.com/thesabotender/fvtt-module-stream-view/blob/master/CHANGELOG.md",
+  "manifest": "https://github.com/thesabotender/fvtt-module-stream-view/raw/master/module.json",
+  "download": "https://github.com/thesabotender/fvtt-module-stream-view/releases/download/12.0.0/stream-view-12.0.0.zip"
 }
