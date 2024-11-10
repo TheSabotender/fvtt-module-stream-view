@@ -7,15 +7,18 @@
     {
       "name": "sPOiDar",
       "url": "https://github.com/sPOiDar"
+    },
+    {
+      "name": "TheSabotender",
+      "url": "https://twitch.tv/thesabotender"
     }
   ],
-  "version": "2.0.3.2",
-  "minimumCoreVersion": "10",
-  "compatibleCoreVersion": "11",
+  "version": "12.0.0",
+  "minimumCoreVersion": "12",
+  "compatibleCoreVersion": "12",
   "compatibility": {
-    "minimum": "10",
-    "verified": "11",
-    "maximum": "11"
+    "minimum": "12",
+    "verified": "12"
   },
   "esmodules": [
     "modules/init.js"
@@ -40,8 +43,7 @@
       "name": "stream-view-macros",
       "label": "Stream View Macros",
       "path": "./packs/stream-view-macros.db",
-      "type": "Macro",
-      "entity": "Macro"
+      "type": "Macro"
     }
   ],
   "relationships": {
